@@ -1,6 +1,6 @@
 
 
-export default function (filme) {
+export default function filmeValidation (filme) {
 
     if (!filme.filme) {
 

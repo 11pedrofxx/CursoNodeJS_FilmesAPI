@@ -52,3 +52,25 @@ export async function postFilme(filme) {
     // qual foi o ID do filme que acabou de ser cadastrado.
     return filmeid;
 }
+
+
+
+export async function searchMovie(nome) {
+
+    const command = `
+
+    select id_filme            id,
+    filme                      nomeFilme, 
+    avaliacao, 
+    lancamento,
+    disponivel
+    from tb_filme
+    where filme like ?
+
+    `
+
+    let resposta = await connection.query(command, [ '%' + nome + '%' ]);
+    let registros = resposta[0];
+
+    return registros;
+}

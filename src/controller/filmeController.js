@@ -1,5 +1,6 @@
 import { Router } from "express";
 import saveMovie from "../service/movie/postFilmeService.js";
+import buscarpornome from "../service/movie/consultarFilmeService.js";
 
 const endpoints = Router();
  
@@ -28,7 +29,22 @@ endpoints.post ('/Filme', async (req, resp ) => {
 
 })
 
+endpoints.get ('/filme', async (req, resp) => {
 
+    try {
+        let nome = req.query.nome
+        let registros = await buscarpornome(nome)
+        resp.send(registros)
+        
+    } catch (error) {
+        
+        logError(error)
+        resp.status(400).send(ErrorDefault(error))
+
+    }
+    
+
+})
 
 
 export default endpoints;
