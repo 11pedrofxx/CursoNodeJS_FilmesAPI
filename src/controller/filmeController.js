@@ -1,12 +1,13 @@
 import { Router } from "express";
+
 import saveMovie from "../service/movie/postFilmeService.js";
 import buscarpornome from "../service/movie/consultarFilmeService.js";
+import buscabyid from "../service/movie/consultarPorIDService.js";
+
 
 const endpoints = Router();
  
-
 endpoints.post ('/Filme', async (req, resp ) => {
-
 
     try {
         
@@ -43,6 +44,20 @@ endpoints.get ('/filme', async (req, resp) => {
 
     }
     
+})
+
+endpoints.get ('/filme/:id', async (req, resp) => {
+
+    try {
+        
+        let id = req.params.id;
+        let filme = await buscabyid(id);
+        resp.send(filme)
+
+    } catch (error) {
+        logError(error)
+        resp.status(400).send(ErrorDefault(error))
+    }
 
 })
 

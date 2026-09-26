@@ -74,3 +74,22 @@ export async function searchMovie(nome) {
 
     return registros;
 }
+
+export async function buscarId(id) {
+
+    const command = `
+
+    select id_filme,
+    filme,
+    sinopse,
+    avaliacao,
+    lancamento,
+    disponivel, 
+    capa from tb_filme
+    where id_filme = ?
+
+    `
+    let resposta = await connection.query(command, [id])
+    let registros = resposta[0];
+    return registros;
+}
