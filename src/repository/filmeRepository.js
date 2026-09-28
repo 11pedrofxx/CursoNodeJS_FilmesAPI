@@ -75,6 +75,27 @@ export async function searchMovie(nome) {
     return registros;
 }
 
+export async function buscarnNomeIgual(nome) {
+
+    const command = `
+
+    select id_filme            id,
+    filme                      nomeFilme, 
+    avaliacao, 
+    lancamento,
+    disponivel
+    from tb_filme
+    where filme = ?
+
+    `
+
+    let resposta = await connection.query(command, [nome]);
+    let registros = resposta;
+
+    return registros;
+}
+
+
 export async function buscarId(id) {
 
     const command = `
@@ -92,4 +113,36 @@ export async function buscarId(id) {
     let resposta = await connection.query(command, [id])
     let registros = resposta[0];
     return registros;
+}
+
+export async function editFilme(filme, id) {
+
+    const command = `
+    
+    update tb_filme
+        set filme = ?,
+        sinopse = ?,
+        avaliacao = ?,
+        lancamento = ?,
+        disponivel = ?
+    where id_filme = ?;
+
+    `
+
+    let resposta = await connection.query(command, [
+
+        filme.filme,
+        filme.sinopse,
+        filme.avaliacao,
+        filme.lancamento,
+        filme.disponivel,
+        id
+
+    ])
+
+    let info = resposta[0];
+    let linhasafetadas = info.affectedRows
+
+    return linhasafetadas;
+
 }

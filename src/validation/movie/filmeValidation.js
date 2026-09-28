@@ -1,5 +1,15 @@
 
 
+export function filmeigual (igual) {
+
+    if (igual.length > 0) {
+
+        throw new Error('Esse filme já foi adicionado')
+
+    }
+
+}
+
 export default function filmeValidation (filme) {
 
     if (!filme.filme) {
@@ -33,3 +43,4 @@ export default function filmeValidation (filme) {
     }
 
 }
+
