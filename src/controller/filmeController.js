@@ -4,6 +4,7 @@ import saveMovie from "../service/movie/postFilmeService.js";
 import buscarpornome from "../service/movie/consultarFilmeService.js";
 import buscabyid from "../service/movie/consultarPorIDService.js";
 import updatefilmeservice from "../service/movie/updatefilmeService.js";
+import filmesService from "../service/movie/listartodosfilmesService.js";
 
 
 const endpoints = Router();
@@ -77,6 +78,20 @@ endpoints.put('/filme/:id', async (req, resp) => {
         resp.status(400).send(ErrorDefault(error))
     }
 
+
+})
+
+endpoints.get ('/listarFilmes', async (req, resp) => {
+
+    try {
+        
+        let resposta = await filmesService();
+        resp.send(resposta);
+
+    } catch (error) {
+        logError(error)
+        resp.status(400).send(ErrorDefault(error))
+    }
 
 })
 

@@ -146,3 +146,15 @@ export async function editFilme(filme, id) {
     return linhasafetadas;
 
 }
+
+export async function todosfilme() {
+
+    const command = `
+    select * from tb_filme
+    `
+
+    let resposta = await connection.query(command, []);
+    let registros = resposta[0];
+    return registros;
+
+}
