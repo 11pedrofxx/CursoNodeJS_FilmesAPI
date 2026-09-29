@@ -5,6 +5,7 @@ import buscarpornome from "../service/movie/consultarFilmeService.js";
 import buscabyid from "../service/movie/consultarPorIDService.js";
 import updatefilmeservice from "../service/movie/updatefilmeService.js";
 import filmesService from "../service/movie/listartodosfilmesService.js";
+import deleteFilmeService from "../service/movie/deleteFilmeService.js";
 
 
 const endpoints = Router();
@@ -93,6 +94,21 @@ endpoints.get ('/listarFilmes', async (req, resp) => {
         resp.status(400).send(ErrorDefault(error))
     }
 
+})
+
+endpoints.delete('/filme/:id', async (req, resp) => {
+
+    try {
+        let id = req.params.id;
+        let linhasafetadas = await deleteFilmeService(id)
+       resp.status(204).send();
+
+    } catch (error) {
+        logError(error)
+        resp.status(400).send(ErrorDefault(error))
+    }
+
+    
 })
 
 

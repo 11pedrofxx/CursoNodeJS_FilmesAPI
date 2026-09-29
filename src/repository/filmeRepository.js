@@ -158,3 +158,18 @@ export async function todosfilme() {
     return registros;
 
 }
+
+export async function deleteFilme(id) {
+
+    const command = `
+    
+    DELETE FROM tb_filme
+        WHERE id_filme = ?
+
+    `
+
+    let resposta = await connection.query(command, [id]);
+    let info = resposta[0]
+    let linhasafetadas = info.affectedRows;
+    return linhasafetadas;
+}
